@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 from app.utils.file import ALLOWED_EXTENSIONS
 
 
-class PostForm(FlaskForm):
+class CreatePostForm(FlaskForm):
     post_image = FileField(
         'Image',
         render_kw={'style': 'height: auto'},
