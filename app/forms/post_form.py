@@ -8,7 +8,7 @@ from app.utils.file import ALLOWED_EXTENSIONS
 
 class PostForm(FlaskForm):
     post_image = FileField(
-        'image',
+        'Image',
         render_kw={'style': 'height: auto'},
         validators=[
             FileRequired(message='Must attach a photo'),
@@ -20,7 +20,7 @@ class PostForm(FlaskForm):
         'Caption',
         render_kw={'rows': 5, 'style': 'height: auto'},
         validators=[
-            DataRequired(message='Caption Required')
+            DataRequired(message='Caption required')
         ]
     )
 
