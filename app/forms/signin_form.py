@@ -6,15 +6,10 @@ from app.models import User
 
 
 class SigninForm(FlaskForm):
-    EMAIL_LENGTH_MAX = 50
-    PASSWORD_LENGTH_MIN = 6
-    PASSWORD_LENGTH_MAX = 20
-
     email = StringField(
         "Email",
         validators=[
             DataRequired(message="Enter an email address."),
-            Length(max=EMAIL_LENGTH_MAX, message=f"Email cannot be more than {EMAIL_LENGTH_MAX} characters long."),
             Email(message="Enter a valid email address.")
         ]
     )
@@ -23,11 +18,6 @@ class SigninForm(FlaskForm):
         "Password",
         validators=[
             DataRequired(message="Enter a password."),
-            Length(
-                min=PASSWORD_LENGTH_MIN,
-                max=PASSWORD_LENGTH_MAX,
-                message=f"Password must be {PASSWORD_LENGTH_MIN} to {PASSWORD_LENGTH_MAX} characters long."
-            )
         ]
     )
 
