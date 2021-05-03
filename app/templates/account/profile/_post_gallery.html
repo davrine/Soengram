@@ -5,13 +5,12 @@
 
 {% if user.posts|length > 0 %}
     {% for post in user.posts %}
-        <div class="col" id="post-grid-item-{{ post.post_id }}">
-            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#post-modal-{{ post.post_id }}">
+        <div class="col" id="post-grid-item-{{ post.id }}">
+            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#post-modal-{{ post.id }}">
                 <img src="{{ post.image_url }}" class="gallery-image" alt="">
                 <div class="gallery-item-info">
                     <ul>
-    {#                TODO: Uncomment when implementing comments #}
-    {#                    <li class="gallery-item-comments"><i class="fas fa-comment" aria-hidden="true"></i> 2</li>#}
+                        <li class="gallery-item-comments"><i class="fas fa-comment" aria-hidden="true"></i><span id="comment-count-{{ post.id }}">{{ post.comments|length }}</span></li>
                     </ul>
                 </div>
             </div>

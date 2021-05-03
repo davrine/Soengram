@@ -1,0 +1,49 @@
+{% from "components/post/post_comment.html" import post_comment with context %}
+{% from "components/post/post_modal.html" import post_modal with context %}
+{% from "components/post/post_comment_input.html" import post_comment_input with context %}
+
+{# Params:
+    - post: Post
+#}
+{% macro post_card(post) -%}
+    <div id="card-{{ post.id }}" class="card col-12">
+        <div class="card-header">
+            <div class="card-header-user-info">
+                <a href="/{{ post.user.username }}">
+                    <img src="{{ url_for('static', filename='assets/default-profile-picture.png') }}" class="post-profile-pic rounded-circle">
+                    <span class="post-username align-middle">{{ post.user.username }}</span>
+                </a>
+            </div>
+        </div>
+        <img class="card-img rounded-0" src="{{ post.image_url }}">
+        <div class="card-body">
+            <div class="card-comments">
+                {{ post_comment(post.user, post, "postDescription", "card") }}
+
+                {% if post.comments|length > 2 %}
+                    <div class="card-comments-all" data-bs-toggle="modal" data-bs-target="#post-modal-{{ post.id }}">
+                        <span>View all <span id="comment-count-{{ post.id }}">{{ post.comments|length }}</span> comments</span>
+                    </div>
+                {% endif %}
+
+                <div id="comment-container-{{ post.id }}-card">
+                    {% if post.comments[0] %}
+                        {{ post_comment(user, post.comments[0], "postDescription", "card") }}
+                    {% endif %}
+                    {% if post.comments[1] %}
+                        {{ post_comment(user, post.comments[1], "postDescription", "card") }}
+                    {% endif %}
+                </div>
+
+                <div class="card-post-date">
+                    <span>{{ post.created_at|postdateformat|uppercase }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="card-add-comment">
+                {{ post_comment_input(post, 'card') }}
+            </div>
+        </div>
+    </div>
+    {{ post_modal(post.user, post) }}
+{%- endmacro %}
